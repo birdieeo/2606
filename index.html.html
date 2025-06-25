@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Surprise</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right top, #ff9a9e, #fad0c4, #fad0c4);
+      color: #2c2c2c;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      overflow: hidden;
+      background-attachment: fixed;
+      animation: bgPulse 15s infinite alternate;
+    }
+    @keyframes bgPulse {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #e91e63;
+      animation: confetti-fall linear infinite;
+    }
+    @keyframes confetti-fall {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+    .slide {
+      display: none;
+      padding: 40px;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .slide.active {
+      display: block;
+      opacity: 1;
+    }
+    .hidden {
+      display: none;
+    }
+    .button {
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 20px;
+      cursor: pointer;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: background 0.3s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+    .button:hover {
+      background-color: #d81b60;
+    }
+    img {
+      margin-top: 20px;
+      max-width: 200px;
+    }
+    .error-text {
+      margin-top: 20px;
+      color: #ff4081;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity 0.5s ease-in;
+    }
+    .error-text.visible {
+      opacity: 1;
+    }
+    .qris {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .qris img {
+      width: 150px;
+      height: 150px;
+    }
+    .clickable-image {
+      cursor: pointer;
+      max-width: 150px;
+      transition: transform 0.3s ease;
+    }
+    .clickable-image:hover {
+      transform: scale(1.1);
+    }
+    .big-emoji {
+      font-size: 80px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="confetti" id="confetti"></div>
+  <div id="slide0" class="slide active">
+    <h1>Oops... is it someone's birthday? 🎉</h1>
+    <button class="button" onclick="goToSlide(1)">Let's find out!</button>
+  </div>
+
+  <div id="slide1" class="slide" onclick="goToSlide(2)">
+    <h2>Guess who? 👀</h2>
+    <img src="bang-remon.jpg" alt="Bang Remon">
+  </div>
+
+  <div id="slide2" class="slide">
+    <h1>Make a wish and click the cake 🎂</h1>
+    <div class="big-emoji" onclick="goToSlide(3)">🎂</div>
+  </div>
+
+  <div id="slide3" class="slide">
+    <h2>When is Bang Remon's birthday?</h2>
+    <button class="button" onclick="wrongAnswer()">June 20</button>
+    <button class="button" onclick="goToSlide(4)">June 26</button>
+    <div id="errorMsg" class="error-text">Oops, try again! 😝</div>
+  </div>
+
+  <div id="slide4" class="slide">
+    <p>Click the envelope to read Deti's letter ✉️</p>
+    <div class="big-emoji" onclick="goToSlide(5)">✉️</div>
+  </div>
+
+  <div id="slide5" class="slide">
+    <h2>To My Dearest Bang Raymond 💖</h2>
+    <p style="max-width:600px;margin:auto;white-space:pre-wrap;">
+      Happy Birthday, My Love!
+      Today is all about you, the kindest, the funniest, and the best!
+I’m beyond grateful for every little moment we’ve shared and for all the memories we’ve yet to create.
+      Let’s keep growing, dreaming, and being silly together 💫
+
+      Thank you for always being patient with me, for honoring me in ways that truly touch my heart, and for making me feel like a priority (even when you’re tired:).
+      Your love makes me feel safe, seen, and deeply cherished.
+
+      On your 26th birthday, I pray for more peace, joy, love, success, and strength to follow your purpose.
+      May all your dreams come true, and may happiness always find its way to you.
+      And most of all, may your faith grow stronger as you continue becoming the man you're meant to be.
+
+      With all my heart,
+      Deti
+    </p>
+    <button class="button" onclick="goToSlide(6)">Next</button>
+  </div>
+
+  <div id="slide6" class="slide">
+    <h2>Happy Birthday, Love! 💝</h2>
+    <p>Here's something playful and thoughtful just for you 💡</p>
+    <div class="qris">
+      <div>
+        <a href="https://open.spotify.com/playlist/10chbs7iDPgV9qP8CHXFtB?si=qCsqxJDuSMKJBfweTZmcTQ&pt=adb73de0c3ce8fbc32304219147e15f2&pi=H-sjysRTTBizg" target="_blank">
+          <img src="qrspotify.png" alt="Spotify QR">
+        </a>
+      </div>
+      <div>
+        <a href="https://calendar.google.com/calendar/u/0?cid=OGJmYTI0MWRiNjIyMWE3MzZlYWZmOGFmNDMzMDI1ZDc4MmU0YWJlNjMxZWM2ZjhjODcxZjBiOGY1ZTkyNmU3NkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t" target="_blank">
+          <img src="qrgcal.png" alt="Calendar QR">
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2023/03/03/audio_78a6840b6c.mp3?filename=romantic-piano-14499.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    function goToSlide(num) {
+      const slides = document.querySelectorAll('.slide');
+      slides.forEach(slide => slide.classList.remove('active'));
+      const target = document.getElementById('slide' + num);
+      if (target) target.classList.add('active');
+    }
+
+    function wrongAnswer() {
+      const msg = document.getElementById("errorMsg");
+      msg.classList.add("visible");
+      setTimeout(() => msg.classList.remove("visible"), 2000);
+    }
+
+    function launchConfetti() {
+      const container = document.getElementById('confetti');
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti-piece');
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.animationDuration = 2 + Math.random() * 3 + 's';
+        confetti.style.backgroundColor = ['#ff4081', '#fce4ec', '#f06292'][Math.floor(Math.random() * 3)];
+        confetti.style.top = '-10px';
+        container.appendChild(confetti);
+      }
+    }
+
+    window.onload = launchConfetti;
+  </script>
+</body>
+
+</html>
